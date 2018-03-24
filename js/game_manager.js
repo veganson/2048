@@ -1,14 +1,19 @@
-function GameManager(size, InputManager, Actuator, StorageManager) {
+function GameManager(size, KeyboardManager, VoiceInputManager, Actuator, StorageManager) {
   this.size           = size; // Size of the grid
-  this.inputManager   = new InputManager;
+  this.keyboardManager   = new KeyboardManager;
+  this.voiceManager   = new VoiceInputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
   this.startTiles     = 2;
 
-  this.inputManager.on("move", this.move.bind(this));
-  this.inputManager.on("restart", this.restart.bind(this));
-  this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.keyboardManager.on("move", this.move.bind(this));
+  this.keyboardManager.on("restart", this.restart.bind(this));
+  this.keyboardManager.on("keepPlaying", this.keepPlaying.bind(this));
+
+  this.voiceManager.on("move", this.move.bind(this));
+  this.voiceManager.on("restart", this.restart.bind(this));
+  this.voiceManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
 }
